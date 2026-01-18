@@ -21,13 +21,16 @@ class Popover extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
-      itemBuilder: (context) => [],
+      itemBuilder: (context) => [
+        PopupMenuItem(
+          child: Container(
+            width: width ?? 200,
+            padding: const EdgeInsets.all(8),
+            child: content,
+          ),
+        ),
+      ],
       child: child,
-      builder: (context) => Container(
-        width: width ?? 200,
-        padding: const EdgeInsets.all(8),
-        child: content,
-      ),
     );
   }
 
@@ -51,4 +54,8 @@ enum PopoverPosition {
   left,
   right,
 }
+
+
+
+
 
