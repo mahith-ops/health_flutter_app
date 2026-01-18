@@ -72,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
               type: ButtonType.text,
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Text button clicked!')),
+                  const SnackBar(content: Text('Text button clicked!')),  // Akindu branch test
                 );
               },
             ),
