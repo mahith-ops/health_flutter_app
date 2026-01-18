@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:hello_flutter/components/button/button.dart';
+import 'package:hello_flutter/screens/home/home_page.dart';
+import 'package:hello_flutter/screens/home/Medical_history.dart';
+import 'package:hello_flutter/screens/home/reminders.dart';
+import 'package:hello_flutter/screens/settings/settings.dart';
+import 'package:hello_flutter/components/bottom-navigation/bottom_navigation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,73 +15,96 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Health App',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        scaffoldBackgroundColor: const Color(0xFFF8FAFC),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MainNavigation(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-  final String title;
+class MainNavigation extends StatefulWidget {
+  const MainNavigation({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MainNavigation> createState() => _MainNavigationState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MainNavigationState extends State<MainNavigation> {
+  int _currentIndex = 0;
+
+  final List<Widget> _screens = [
+    const HomePage(),
+    const MedicalHistory(),
+    // Placeholder screens for other tabs
+    Scaffold(
+      backgroundColor: const Color(0xFFF8FAFC),
+      body: const Center(
+        child: Text('Add Screen'),
+      ),
+    ),
+    const RemindersScreen(),
+    const SettingsScreen(),
+  ];
+
+  void _onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _screens,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Primary Button
-            Button(
-              label: 'Primary Button',
-              type: ButtonType.primary,
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Primary button clicked!')),
-                );
-              },
-            ),
-            
-            const SizedBox(height: 16),
-            
-            // Secondary Button
-            Button(
-              label: 'Secondary Button',
-              type: ButtonType.secondary,
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Secondary button clicked!')),
-                );
-              },
-            ),
-            
-            const SizedBox(height: 16),
-            
-            // Text Button
-            Button(
-              label: 'Text Button',
-              type: ButtonType.text,
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Text button clicked!')),
-                );
-              },
-            ),
-          ],
-        ),
+      bottomNavigationBar: _buildBottomNavigation(context),
+    );
+  }
+
+  Widget _buildBottomNavigation(BuildContext context) {
+    final items = [
+      BottomNavigationItem(
+        icon: Icons.home,
+        label: 'Home',
+      ),
+      BottomNavigationItem(
+        icon: Icons.history,
+        label: 'History',
+      ),
+      BottomNavigationItem(
+        icon: Icons.add_circle,
+        label: 'Add',
+      ),
+      BottomNavigationItem(
+        icon: Icons.notifications_outlined,
+        label: 'Reminders',
+      ),
+      BottomNavigationItem(
+        icon: Icons.settings,
+        label: 'Settings',
+      ),
+    ];
+
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, -2),
+          ),
+        ],
+      ),
+      child: BottomNavigation(
+        currentIndex: _currentIndex,
+        onTap: _onTabTapped,
+        items: items,
       ),
     );
   }
