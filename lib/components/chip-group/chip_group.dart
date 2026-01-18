@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../chip/chip.dart';
+import '../chip/chip.dart' as custom;
 
 class ChipGroup extends StatelessWidget {
   final List<String> chips;
@@ -31,7 +31,7 @@ class ChipGroup extends StatelessWidget {
 
         return GestureDetector(
           onTap: onChipTap != null ? () => onChipTap!(chip) : null,
-          child: Chip(
+          child: custom.Chip(
             label: chip,
             color: isSelected
                 ? (selectedColor ?? Theme.of(context).colorScheme.primary.withOpacity(0.2))
