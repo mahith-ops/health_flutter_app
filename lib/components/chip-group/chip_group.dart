@@ -34,20 +34,19 @@ class ChipGroup extends StatelessWidget {
           child: custom_chip.Chip(
             label: chip,
             color: isSelected
-                ? (selectedColor ?? Theme.of(context).colorScheme.primary.withOpacity(0.2))
-                : (unselectedColor ?? Theme.of(context).colorScheme.primary.withOpacity(0.1)),
+                ? (selectedColor ??
+                      Theme.of(context).colorScheme.primary.withOpacity(0.2))
+                : (unselectedColor ??
+                      Theme.of(context).colorScheme.primary.withOpacity(0.1)),
             textColor: isSelected
                 ? (selectedColor ?? Theme.of(context).colorScheme.primary)
                 : null,
-            onDeleted: onChipDeleted != null ? () => onChipDeleted!(chip) : null,
+            onDeleted: onChipDeleted != null
+                ? () => onChipDeleted!(chip)
+                : null,
           ),
         );
       }).toList(),
     );
   }
 }
-
-
-
-
-

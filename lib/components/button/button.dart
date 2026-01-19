@@ -64,7 +64,7 @@ class Button extends StatelessWidget {
     switch (type) {
       case ButtonType.primary:
         return baseStyle.copyWith(
-          backgroundColor: WidgetStateProperty.all(Colors.blue),
+          backgroundColor: WidgetStateProperty.all(color ?? Colors.blue),
         );
       case ButtonType.secondary:
         return baseStyle.copyWith(

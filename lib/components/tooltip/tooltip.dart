@@ -1,3 +1,4 @@
+import 'dart:core';
 import 'package:flutter/material.dart' as material;
 
 class Tooltip extends material.StatelessWidget {
