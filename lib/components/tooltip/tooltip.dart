@@ -1,9 +1,10 @@
+import 'dart:core';
 import 'package:flutter/material.dart' as material;
 
 class Tooltip extends material.StatelessWidget {
   final material.Widget child;
   final String message;
-  final material.Duration? waitDuration;
+  final Duration? waitDuration;
   final TooltipPosition position;
 
   const Tooltip({
@@ -18,7 +19,7 @@ class Tooltip extends material.StatelessWidget {
   material.Widget build(material.BuildContext context) {
     return material.Tooltip(
       message: message,
-      waitDuration: waitDuration ?? const material.Duration(milliseconds: 500),
+      waitDuration: waitDuration ?? const Duration(milliseconds: 500),
       preferBelow: position == TooltipPosition.bottom,
       verticalOffset: _getVerticalOffset(),
       child: child,

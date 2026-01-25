@@ -18,16 +18,18 @@ class Popover extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopupMenuButton<String>(
       offset: _getOffset(),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      itemBuilder: (context) => [],
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      itemBuilder: (context) => [
+        PopupMenuItem<String>(
+          enabled: false,
+          child: Container(
+            width: width ?? 200,
+            padding: const EdgeInsets.all(8),
+            child: content,
+          ),
+        ),
+      ],
       child: child,
-      builder: (context) => Container(
-        width: width ?? 200,
-        padding: const EdgeInsets.all(8),
-        child: content,
-      ),
     );
   }
 
@@ -45,10 +47,4 @@ class Popover extends StatelessWidget {
   }
 }
 
-enum PopoverPosition {
-  top,
-  bottom,
-  left,
-  right,
-}
-
+enum PopoverPosition { top, bottom, left, right }

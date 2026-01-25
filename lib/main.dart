@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hello_flutter/screens/home/home_page.dart';
-import 'package:hello_flutter/screens/home/Medical_history.dart';
-import 'package:hello_flutter/screens/home/reminders.dart';
-import 'package:hello_flutter/screens/settings/settings.dart';
-import 'package:hello_flutter/components/bottom-navigation/bottom_navigation.dart';
+import 'package:hello_flutter/Features/Medical_History/add_record.dart';
 
 void main() {
   runApp(const MyApp());
@@ -41,9 +37,7 @@ class _MainNavigationState extends State<MainNavigation> {
     // Placeholder screens for other tabs
     Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
-      body: const Center(
-        child: Text('Add Screen'),
-      ),
+      body: const Center(child: Text('Add Screen')),
     ),
     const RemindersScreen(),
     const SettingsScreen(),
@@ -58,36 +52,21 @@ class _MainNavigationState extends State<MainNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _screens,
-      ),
+      body: IndexedStack(index: _currentIndex, children: _screens),
       bottomNavigationBar: _buildBottomNavigation(context),
     );
   }
 
   Widget _buildBottomNavigation(BuildContext context) {
     final items = [
-      BottomNavigationItem(
-        icon: Icons.home,
-        label: 'Home',
-      ),
-      BottomNavigationItem(
-        icon: Icons.history,
-        label: 'History',
-      ),
-      BottomNavigationItem(
-        icon: Icons.add_circle,
-        label: 'Add',
-      ),
+      BottomNavigationItem(icon: Icons.home, label: 'Home'),
+      BottomNavigationItem(icon: Icons.history, label: 'History'),
+      BottomNavigationItem(icon: Icons.add_circle, label: 'Add'),
       BottomNavigationItem(
         icon: Icons.notifications_outlined,
         label: 'Reminders',
       ),
-      BottomNavigationItem(
-        icon: Icons.settings,
-        label: 'Settings',
-      ),
+      BottomNavigationItem(icon: Icons.settings, label: 'Settings'),
     ];
 
     return Container(
