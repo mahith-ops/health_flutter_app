@@ -14,27 +14,24 @@ class _RemindersScreenState extends State<RemindersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20),
-              _buildHeader(context),
-              const SizedBox(height: 28),
-              _buildDailyAdherenceCard(context),
-              const SizedBox(height: 28),
-              _buildDateSelector(context),
-              const SizedBox(height: 24),
-              _buildFilterTabs(context),
-              const SizedBox(height: 24),
-              _buildMedicationSections(context),
-              const SizedBox(height: 80), // Bottom spacing for navigation
-            ],
-          ),
+    return SafeArea(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 20),
+            _buildHeader(context),
+            const SizedBox(height: 28),
+            _buildDailyAdherenceCard(context),
+            const SizedBox(height: 28),
+            _buildDateSelector(context),
+            const SizedBox(height: 24),
+            _buildFilterTabs(context),
+            const SizedBox(height: 24),
+            _buildMedicationSections(context),
+            const SizedBox(height: 80), // Bottom spacing for navigation
+          ],
         ),
       ),
     );

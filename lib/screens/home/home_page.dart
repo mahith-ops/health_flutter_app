@@ -5,35 +5,33 @@ import 'package:hello_flutter/components/card/card.dart' as ds;
 import 'package:hello_flutter/components/icon/icon.dart' as ds;
 import 'package:hello_flutter/components/icon-button/icon_button.dart' as ds;
 import 'package:hello_flutter/screens/notifications/notifications.dart';
+import 'package:hello_flutter/screens/vitals/vital_monitoring.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20),
-              _buildHeader(context),
-              const SizedBox(height: 32),
-              _buildTodaysMedications(context),
-              const SizedBox(height: 28),
-              _buildQuickHealthSnapshot(context),
-              const SizedBox(height: 28),
-              _buildUpcomingAppointment(context),
-              const SizedBox(height: 28),
-              _buildFamilyCare(context),
-              const SizedBox(height: 28),
-              _buildSmartAlerts(context),
-              const SizedBox(height: 32),
-            ],
-          ),
+    return SafeArea(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 20),
+            _buildHeader(context),
+            const SizedBox(height: 32),
+            _buildTodaysMedications(context),
+            const SizedBox(height: 28),
+            _buildQuickHealthSnapshot(context),
+            const SizedBox(height: 28),
+            _buildUpcomingAppointment(context),
+            const SizedBox(height: 28),
+            _buildFamilyCare(context),
+            const SizedBox(height: 28),
+            _buildSmartAlerts(context),
+            const SizedBox(height: 32),
+          ],
         ),
       ),
     );
@@ -359,26 +357,52 @@ class HomePage extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: _buildHealthCard(
-                context,
-                Icons.favorite,
-                'Blood Pressure',
-                '120/80',
-                'mmHg',
-                const Color(0xFFEF4444),
-                isNormal: true,
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const VitalMonitoringScreen(
+                        initialType: VitalType.bloodPressure,
+                      ),
+                    ),
+                  );
+                },
+                borderRadius: BorderRadius.circular(20),
+                child: _buildHealthCard(
+                  context,
+                  Icons.favorite,
+                  'Blood Pressure',
+                  '120/80',
+                  'mmHg',
+                  const Color(0xFFEF4444),
+                  isNormal: true,
+                ),
               ),
             ),
             const SizedBox(width: 12),
             Expanded(
-              child: _buildHealthCard(
-                context,
-                Icons.water_drop,
-                'Blood Sugar',
-                '95',
-                'mg/dL',
-                const Color(0xFFF59E0B),
-                isNormal: true,
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const VitalMonitoringScreen(
+                        initialType: VitalType.bloodSugar,
+                      ),
+                    ),
+                  );
+                },
+                borderRadius: BorderRadius.circular(20),
+                child: _buildHealthCard(
+                  context,
+                  Icons.water_drop,
+                  'Blood Sugar',
+                  '95',
+                  'mg/dL',
+                  const Color(0xFFF59E0B),
+                  isNormal: true,
+                ),
               ),
             ),
           ],
@@ -401,7 +425,7 @@ class HomePage extends StatelessWidget {
       elevation: 0,
       color: Colors.white,
       padding: const EdgeInsets.all(20),
-      onTap: () {},
+      onTap: null,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

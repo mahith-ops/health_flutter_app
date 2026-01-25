@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_flutter/screens/settings/manage_family_access.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -12,46 +13,39 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFF8FAFC),
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          color: const Color(0xFF0F172A),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        title: const Text(
-          'Settings',
-          style: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.w700,
-            color: Color(0xFF0F172A),
-            letterSpacing: -0.3,
-          ),
+    return SafeArea(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 20),
+            _buildHeader(context),
+            const SizedBox(height: 20),
+            _buildProfileCard(context),
+            const SizedBox(height: 24),
+            _buildCareCircleSection(context),
+            const SizedBox(height: 24),
+            _buildAppPreferencesSection(context),
+            const SizedBox(height: 24),
+            _buildAccountSection(context),
+            const SizedBox(height: 24),
+            _buildFooter(context),
+            const SizedBox(height: 80), // Bottom spacing for navigation
+          ],
         ),
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20),
-              _buildProfileCard(context),
-              const SizedBox(height: 24),
-              _buildCareCircleSection(context),
-              const SizedBox(height: 24),
-              _buildAppPreferencesSection(context),
-              const SizedBox(height: 24),
-              _buildAccountSection(context),
-              const SizedBox(height: 24),
-              _buildFooter(context),
-              const SizedBox(height: 80), // Bottom spacing for navigation
-            ],
-          ),
-        ),
+    );
+  }
+
+  Widget _buildHeader(BuildContext context) {
+    return const Text(
+      'Settings',
+      style: TextStyle(
+        fontSize: 32,
+        fontWeight: FontWeight.w700,
+        color: Color(0xFF0F172A),
+        letterSpacing: -0.5,
       ),
     );
   }
@@ -164,40 +158,49 @@ class _SettingsScreenState extends State<SettingsScreen> {
             borderRadius: BorderRadius.circular(20),
           ),
           color: Colors.white,
-          child: ListTile(
-            leading: Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: const Color(0xFF6366F1).withOpacity(0.1),
-                borderRadius: BorderRadius.circular(12),
+          child: InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const ManageFamilyAccessScreen(),
+                ),
+              );
+            },
+            child: ListTile(
+              leading: Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: const Color(0xFF6366F1).withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(
+                  Icons.family_restroom,
+                  color: Color(0xFF6366F1),
+                  size: 22,
+                ),
               ),
-              child: const Icon(
-                Icons.family_restroom,
-                color: Color(0xFF6366F1),
-                size: 22,
+              title: const Text(
+                'Manage Family',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xFF0F172A),
+                ),
+              ),
+              subtitle: Text(
+                'Add or remove members',
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Colors.grey[600],
+                ),
+              ),
+              trailing: Icon(
+                Icons.chevron_right,
+                color: Colors.grey[400],
               ),
             ),
-            title: const Text(
-              'Manage Family',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: Color(0xFF0F172A),
-              ),
-            ),
-            subtitle: Text(
-              'Add or remove members',
-              style: TextStyle(
-                fontSize: 13,
-                color: Colors.grey[600],
-              ),
-            ),
-            trailing: Icon(
-              Icons.chevron_right,
-              color: Colors.grey[400],
-            ),
-            onTap: () {},
           ),
         ),
       ],
