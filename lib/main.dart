@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hello_flutter/Features/Medical_History/add_record.dart';
+import 'package:hello_flutter/Features/Authentication/sign_in_screen.dart';
+import 'package:hello_flutter/Theme/app_colors.dart';
+import 'package:hello_flutter/components/bottom-navigation/bottom_navigation.dart';
+import 'package:hello_flutter/screens/home/home_page.dart';
+import 'package:hello_flutter/screens/home/Medical_history.dart';
+import 'package:hello_flutter/screens/home/reminders.dart';
+import 'package:hello_flutter/screens/settings/settings.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,10 +19,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Health App',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        scaffoldBackgroundColor: const Color(0xFFF8FAFC),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
+        scaffoldBackgroundColor: AppColors.scaffoldBackground,
       ),
-      home: const MainNavigation(),
+      home: const SignInScreen(),
+      routes: <String, WidgetBuilder>{
+        '/sign-in': (context) => const SignInScreen(),
+        '/home': (context) => const MainNavigation(),
+      },
     );
   }
 }

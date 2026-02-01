@@ -1,2 +1,12 @@
-//dont know what this is but chat said to use this as it will be useful in the future
+/// Project-wide spacing constants (in logical pixels).
+/// Use for padding, margins, and gaps.
+class Spacing {
+  Spacing._();
 
+  static const double xs = 4;
+  static const double sm = 8;
+  static const double md = 16;
+  static const double lg = 24;
+  static const double xl = 32;
+  static const double xxl = 48;
+}

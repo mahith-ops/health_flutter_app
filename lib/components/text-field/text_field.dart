@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' as material;
 
 class TextField extends material.StatelessWidget {
   final String? value;
+  final material.TextEditingController? controller;
   final material.ValueChanged<String>? onChanged;
   final material.ValueChanged<String>? onSubmitted;
   final String? label;
@@ -17,6 +18,7 @@ class TextField extends material.StatelessWidget {
   const TextField({
     super.key,
     this.value,
+    this.controller,
     this.onChanged,
     this.onSubmitted,
     this.label,
@@ -43,7 +45,7 @@ class TextField extends material.StatelessWidget {
           const material.SizedBox(height: 8),
         ],
         material.TextField(
-          controller: value != null ? material.TextEditingController(text: value) : null,
+          controller: controller ?? (value != null ? material.TextEditingController(text: value) : null),
           onChanged: onChanged,
           onSubmitted: onSubmitted,
           obscureText: obscureText,
